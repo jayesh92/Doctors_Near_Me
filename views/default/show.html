@@ -1,0 +1,35 @@
+{{extend 'layout.html'}}
+<h3> {{=doctor.name}} </h3>
+<h4> {{=doctor.specialization}} ,  {{=doctor.locality}} </h4>
+
+<br/>
+<h4>Images</h4>
+{{=A("Add Images",_href=URL(r=request,f="add_image", args=doctor.id))}}
+<hr>
+{{for i in image:}}
+{{if i.doctor_id!=doctor.id:}}
+{{continue}}
+{{=IMG(_src=URL(r=request, f='download', args=i.file),_width="200",_height="200")}}
+{{pass}}
+
+
+<h4>FeedBack</h4>
+<hr>
+{{for i in comment:}}
+{{if i.doctor_id!=doctor.id:}}
+{{ continue }}
+{{=i.body}}
+<br/>
+<i> By: {{=i.author}} </i>
+<br/></br>
+{{ if i.author != auth.user.username : }}
+{{ continue }}
+<div align="right">
+{{=A("Uncomment",_href=URL(r=request,f="uncomment", args=[i.id,doctor.id]))}} 
+</div>
+
+{{pass}}
+{{pass}}
+
+
+{{=form}}

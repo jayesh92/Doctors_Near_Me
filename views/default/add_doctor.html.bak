@@ -1,0 +1,8 @@
+{{extend 'layout.html'}}
+
+<form method="post" action={{=URL('add_doctor')}}>
+Doctor name: <input name="doctor_name"><br>
+Specialization: <input name="specialization"><br>
+Locality: <input locality="locality"><br>
+<input type="submit" value="Suvmit" />
+</form>
